@@ -9,5 +9,8 @@ data class CurrentWeather(
     @SerializedName("HasPrecipitation") val hasPrecipitation: Boolean = false,
     @SerializedName("IsDayTime") val isDayTime: Boolean = true,
     @SerializedName("Temperature") val temperature: TemperatureSystem,
-    @SerializedName("Link") val link: String
+    @SerializedName("Link") val link: String,
+    @SerializedName("RelativeHumidity") val humidity: Double,
+    @SerializedName("UVIndex") val uvIndex: Int,
+    @SerializedName("UVIndexText") val uvIndexText: String
 )

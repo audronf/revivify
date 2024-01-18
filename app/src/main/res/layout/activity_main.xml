@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/timezonesContainer"
-        android:layout_width="wrap_content"
+        android:layout_width="800dp"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/container_color"
         app:cardCornerRadius="25dp"
@@ -19,11 +19,11 @@
 
         <LinearLayout
 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="32dp">
+            android:paddingVertical="32dp">
 
             <TextView
                 android:id="@+id/currentDate"
@@ -74,7 +74,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="800dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:cardBackgroundColor="@color/container_color"
@@ -83,13 +83,11 @@
         app:layout_constraintStart_toStartOf="@id/timezonesContainer"
         app:layout_constraintTop_toBottomOf="@id/timezonesContainer">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
+        <include
+            android:id="@+id/currentWeather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/view_weather" />
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

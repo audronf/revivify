@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/container_color"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/sync"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_sync"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <ImageView
+        android:id="@+id/weatherIcon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/sunny"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/temperatureC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+
+        android:fontFamily="@font/montserratbold"
+        android:text="24"
+        android:textColor="@color/text_color"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@id/weatherText"
+        app:layout_constraintStart_toEndOf="@id/weatherIcon"
+        app:layout_constraintTop_toTopOf="@id/weatherIcon"
+        tools:text="24" />
+
+    <TextView
+        android:id="@+id/unitC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserratbold"
+        android:layout_marginStart="2dp"
+        android:text="°C"
+        android:textColor="@color/text_color"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="@id/temperatureC"
+        app:layout_constraintStart_toEndOf="@id/temperatureC"
+        app:layout_constraintTop_toTopOf="@id/temperatureC" />
+
+    <TextView
+        android:id="@+id/temperatureF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserratlight"
+        android:layout_marginStart="4dp"
+        android:text=" | 10° F"
+        android:textColor="@color/text_color"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@id/temperatureC"
+        app:layout_constraintStart_toEndOf="@id/unitC"
+        app:layout_constraintTop_toTopOf="@id/temperatureC"
+        tools:text=" | 10° F" />
+
+
+    <TextView
+        android:id="@+id/weatherText"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserratmedium"
+        android:singleLine="false"
+        android:maxLines="2"
+        android:text="Soleado"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/lastUpdate"
+        app:layout_constraintStart_toStartOf="@id/temperatureC"
+        app:layout_constraintTop_toBottomOf="@id/temperatureC"
+        tools:text="Soleado" />
+
+    <TextView
+        android:id="@+id/lastUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserratlight"
+        android:text="Última actualización blablabla"
+        android:textColor="@color/text_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/divider"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@color/text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/extraWeatherDetailsContainer"
+        app:layout_constraintStart_toEndOf="@id/temperatureF"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/extraWeatherDetailsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="@id/lastUpdate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/divider"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/humidityIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/humidity_high"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/humidityHeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratmedium"
+            android:text="Humedad: "
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/humidityIcon"
+            app:layout_constraintStart_toEndOf="@id/humidityIcon"
+            app:layout_constraintTop_toTopOf="@id/humidityIcon" />
+
+        <TextView
+            android:id="@+id/humidityValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratlight"
+            android:text="65%"
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/humidityIcon"
+            app:layout_constraintStart_toEndOf="@id/humidityHeadline"
+            app:layout_constraintTop_toTopOf="@id/humidityHeadline" />
+
+        <ImageView
+            android:id="@+id/uvIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/beach_access"
+            app:layout_constraintStart_toStartOf="@id/humidityIcon"
+            app:layout_constraintTop_toBottomOf="@id/humidityIcon"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/uvHeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratmedium"
+            android:text="Índice UV: "
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/uvIcon"
+            app:layout_constraintStart_toEndOf="@id/uvIcon"
+            app:layout_constraintTop_toTopOf="@id/uvIcon" />
+
+        <TextView
+            android:id="@+id/uvValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratlight"
+            android:text="7 (Alto)"
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/uvIcon"
+            app:layout_constraintStart_toEndOf="@id/uvHeadline"
+            app:layout_constraintTop_toTopOf="@id/uvHeadline" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

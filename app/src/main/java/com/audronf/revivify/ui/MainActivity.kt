@@ -1,19 +1,20 @@
 package com.audronf.revivify.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.audronf.revivify.databinding.ActivityMainBinding
+import com.audronf.revivify.model.CurrentWeather
 import com.audronf.revivify.model.Timezone
 import com.audronf.revivify.ui.adapter.TimezonesAdapter
 import com.audronf.revivify.ui.viewmodel.WeatherViewModel
 import com.audronf.revivify.utils.DateUtils
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private val weatherViewModel: WeatherViewModel by viewModels()
 
+    // TODO: Control this via RemoteConfig
     private val extraTimezones = listOf(
         Timezone("Los Angeles: ", "America/Los_Angeles"),
         Timezone("New York: ", "America/New_York"),
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setDate()
         setExtraTimezonesAdapter()
         weatherViewModel.weatherState.observe(this) {
-            Log.e("Weather", it.toString())
+            setWeatherState(it)
         }
         getWeatherState()
     }
@@ -59,5 +61,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun getWeatherState() {
         weatherViewModel.getCurrentWeather()
+    }
+
+    private fun setWeatherState(currentWeather: CurrentWeather) {
+        with(binding.currentWeather) {
+            temperatureC.text = currentWeather.temperature.metric.value.toString()
+            temperatureF.text = currentWeather.temperature.imperial.value.toString()
+            weatherText.text = currentWeather.weatherText
+            humidityValue.text = currentWeather.humidity.toString()
+            uvValue.text = currentWeather.uvIndex.toString()
+            lastUpdate.text = currentWeather.dateTime
+            root.setOnClickListener {
+                // TODO: Create an extension function to perform this action
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(currentWeather.link))
+                startActivity(browserIntent)
+            }
+            sync.setOnClickListener { getWeatherState() }
+        }
     }
 }

@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface WeatherService {
 
-    @GET("currentconditions/v1/7894?apikey=V4oH5Gfyhi9AAAynqsVU7mpIualHum4h&language=es-ar")
+    @GET("currentconditions/v1/7894?apikey=V4oH5Gfyhi9AAAynqsVU7mpIualHum4h&language=es-ar&details=true")
     suspend fun getCurrentWeather(): Response<Array<CurrentWeather>>
 }
