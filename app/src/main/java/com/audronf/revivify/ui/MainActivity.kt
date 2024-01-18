@@ -7,7 +7,9 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.audronf.revivify.R
 import com.audronf.revivify.databinding.ActivityMainBinding
+import com.audronf.revivify.extension.openBrowser
 import com.audronf.revivify.model.CurrentWeather
 import com.audronf.revivify.model.Timezone
 import com.audronf.revivify.ui.adapter.TimezonesAdapter
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity() {
             visibility = View.VISIBLE
         }
     }
+
     private fun setDate() {
         binding.currentDate.text = DateUtils.getCurrentDate()
     }
@@ -65,16 +68,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun setWeatherState(currentWeather: CurrentWeather) {
         with(binding.currentWeather) {
+            weatherIcon.setImageResource(currentWeather.getWeatherIconResource())
             temperatureC.text = currentWeather.temperature.metric.value.toString()
-            temperatureF.text = currentWeather.temperature.imperial.value.toString()
+            temperatureF.text = getString(
+                R.string.fahrenheit_temperature_template,
+                currentWeather.temperature.imperial.value.toString()
+            )
             weatherText.text = currentWeather.weatherText
-            humidityValue.text = currentWeather.humidity.toString()
-            uvValue.text = currentWeather.uvIndex.toString()
+            humidityValue.text =
+               getString(R.string.humidity_template, currentWeather.humidity.toString())
+            uvValue.text = getString(
+                R.string.uv_index_template,
+                currentWeather.uvIndex.toString(),
+                currentWeather.uvIndexText
+            )
             lastUpdate.text = currentWeather.dateTime
             root.setOnClickListener {
-                // TODO: Create an extension function to perform this action
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(currentWeather.link))
-                startActivity(browserIntent)
+                openBrowser(currentWeather.link)
             }
             sync.setOnClickListener { getWeatherState() }
         }
